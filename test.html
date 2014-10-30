@@ -1,0 +1,114 @@
+<html>
+	<head>
+    	<style>
+        body{
+			margin:0px;
+		}
+		#map-canvas{
+			margin: 10px;
+			height:450px;
+			width:600px;
+			margin-top: 50px;
+			margin-left: auto;
+  			margin-right: auto;
+		}		
+		header {
+            background-color: black;
+            color:white;
+            text-align:center;
+            padding:5px;
+            height: 70px;;
+		}
+		nav{
+			height:480px;
+			width:165px;
+			float:left;
+			padding:50px;
+		}
+        section {
+            float: left;
+            width: 75%;
+            height: 550px;
+            padding:10px;
+        }
+        footer {
+        	position:fixed;
+         	clear: both;
+            width: 100%;
+            height:50px;
+            background-color: black;
+            color:white;
+        }
+    </style>
+    	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA5d_mimveJTqUiBRcER0_4NGFrWwdWRPk&sensor=false"></script>
+    	<script>
+    	var marker;
+		var map;
+        
+		function initialize() {
+			var location = new google.maps.LatLng(43.303, -91.785706);
+           
+			var mapOptions = {
+    			zoom: 10,
+    			center: location,
+			};
+ 
+			map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
+			var bikeLayer = new google.maps.BicyclingLayer();
+  			bikeLayer.setMap(map);    
+			}
+			google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+	</head>
+	
+	<body align="center">
+		<header><h1> Biking Weather </h1></header>
+		<nav id="test">
+			<p> 5-Day Weather Forecast: </p> 
+    	</nav>
+    	<section>
+    		<div id="map-canvas">	</div>
+    		<p> Welcome to Bjorn's Biking Weather website. Enter a Zip Code and we will find local biking trails and a 5 day forecast for that area.</p>
+    	</section>
+    	<footer>
+        	Enter a Zip Code: <input id="textbox1" value="52101" type="text" />
+        	<input type="button" id="search" value="Search" onclick="getLocation()" />
+    	</footer>
+  	</body>
+  	<script>
+    	function showLocation(){
+        	alert('Latitude: ' + marker.position.lat() + 'Longitude: ' + marker.position.lng());
+    	}
+    	function getLocation(){
+        	var Input = document.getElementById('textbox1');
+        	new google.maps.Geocoder().geocode( { 'address': Input.value}, function(results, status) {
+          	if (status == google.maps.GeocoderStatus.OK) {
+            	if(!marker){
+                	marker = new google.maps.Marker({
+                	map: map,
+              	});
+             	google.maps.event.addListener(marker, 'click', showLocation);
+            	}
+            	marker.setPosition(results[0].geometry.location);
+            	map.setCenter(results[0].geometry.location);
+            	map.setZoom(11)
+            	Input.value = results[0].formatted_address;
+          	} else {
+            	alert("Could not run because: " + status);
+          	}
+        	});
+        	getWeather(Input);
+	}
+  	</script>
+  	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+  	<script src="jquery.zweatherfeed.min.js" type="text/javascript"></script>
+	<script>
+	function getWeather(Input){
+		$(document).ready(function () {
+				$('#test').weatherfeed([Input.value], {
+			forecast: true
+			});
+		});
+	}	
+	</script>
+</html>
