@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<title> To-Do App</title>
+	<style>
+		li {
+			list-style-type:none;
+		}
+		.done {
+			text-decoration: line-through;
+		}
+		body{
+			font-family: Helvetica, Arial, sans-serif;
+			text-align: center;
+			font-weight: 300;
+		}
+		header h1{
+			font-weight: 300;
+			font-size:36pt;
+			margin-top:0px;
+			padding-top:32px;
+			margin-bottom:30px;
+			border-bottom: 1px solid #e4e4e4;
+		}
+		footer{
+			font-size:10pt;
+			position:absolute;
+			bottom: 10px;
+			width:100%;
+			border-top: 1px solid #e4e4e4;		
+		}
+		div{
+			font-size:14pt;
+			margin-top: 0px;
+			border: 1px solid #e4e4e4;
+			width:50%;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		section{
+			font-size: 14pt;
+			position:absolute;
+			bottom:100px;
+			width:100%;
+		}
+
+	</style>
+	<script src = "newtodo.js" type="text/javascript"> </script>
+	<body>
+		<header><h1> To-do List </h1></header>
+		<div><ul id="list"> </ul></div></br>
+		<section>
+			<label for="New Task"> New Task: </label>
+			<input type="text" id="textbox1"/> 
+			<label for="Project Name"> Project Name: </label>
+			<input type="text" id="projectbox"/>
+			<select id="priority">
+				<option> High </option>
+				<option> Medium </option>
+				<option> Low </option>
+			</select>
+			<label for="Due Date"> Due Date </label>
+			<input type="text" id="dueDate"/>
+			<button onclick="execute()"/> Add </button>
+		</section>
+		<footer> 
+			<p> Created by Bjorn Norderhaug </p>
+		</footer>
+	</body>
+</html>
