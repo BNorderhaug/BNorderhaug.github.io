@@ -1,0 +1,22 @@
+<html>
+	<head>
+		<title> XKCD Password Program </title>
+		<link rel="stylesheet" type="text/css" href="style.css"> 
+	</head>
+	<body>
+		<header> <h1> Results </h1> </header>
+ 		{% block content %}
+ 			<table>
+ 				<tr>
+ 					{% for pass in passwords %}
+ 					<td>  {{ pass }} </td></br>
+ 					{% endfor %}
+ 				</tr>
+ 			</table>
+ 
+ 		{% endblock %}
+ 		<footer>
+ 			<p> Created by Bjorn Norderhaug </p>
+ 		</footer>
+ 	</body>
+ </html>
